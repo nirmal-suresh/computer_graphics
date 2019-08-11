@@ -37,7 +37,7 @@ def lineBressenham(x1,y1,x2,y2):
 
 	e=(2*dy)-dx
 
-	for i in range(1,dx):
+	for i in range(1,dx+1):
 		setPixel(x,y)
 		while e>0:
 			if Interchange==1:
