@@ -36,8 +36,8 @@ def Endpoint(x,y,Window):
 
 def Visible(P1code,P2code):
 	Vflag='yes'
-	print P1code
-	print P2code
+	#print P1code
+	#print P2code
 
 	for i in range(0,4):
 		if P1code[i] and P2code[i]:
@@ -82,21 +82,25 @@ def Cohen_Sutherland(Xl,Xr,Yb,Yt):
 				print 'inside if'
 				if P1code[3-i]==0:
 					print 'swap'
-					P1x,P1y=P2x,P2y
+					P1x,P2x=P2x,P1x
+					P1y,P2y=P2y,P1y
 					P1code,P2code=P2code,P1code
+					print 'x1=',P1x,'y1=',P1y
+					print 'x2=',P2x,'y2=',P2y
 
 				if Iflag!=-1 and i<=1:
 					print 'modified'
 					P1y=Slope*(Window[i]-P1x)+P1y
 					P1x=Window[i]
-					print 'x1=',P1x,'y1=',P1y
+					print '1 x1=',P1x,'y1=',P1y
 					P1code=Endpoint(P1x,P1y,Window)
-				if Iflag!=0 and i<=1:
+				if Iflag!=0 and i>1:
 					if Iflag!=1:
 						print 'modified'
 						P1x=(1/Slope)*(Window[i]-P1y)+P1x
 					P1y=Window[i]
-					print 'x1=',P1x,'y1=',P1y
+
+					print '2 x1=',P1x,'y1=',P1y
 					P1code=Endpoint(P1x,P1y,Window)
 
 				Vflag=Visible(P1code,P2code)
