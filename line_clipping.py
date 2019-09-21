@@ -115,7 +115,6 @@ def main():
 	glutInitWindowSize(600,600)
 	glutInitWindowPosition(50,50)
 	glutCreateWindow("Cohen-Sutherland line clipping")
-	glutDisplayFunc(Display)
 	global code
 
 	code=Cohen_Sutherland(Xl,Xr,Yb,Yt)
