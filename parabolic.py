@@ -6,6 +6,15 @@ from math import cos,sin,pi
 point=[0,0]
 g=9.8
 
+def set_identity(r,c):
+	a=[[0 for col in range(c)] for row in range(r)]
+	for i in range(r):
+		for j in range(c):
+			if i==j:
+				a[i][j]=1
+
+	return a
+
 def my_init():
 	global	v,g
 	glClearColor(0.0,0.0,0.0,0.0)
@@ -32,14 +41,13 @@ def matrix_mul(a,b):
 
 def translate(tx,ty):
 	global	point
-	t=[[0 for col in range(3)] for row in range(3)]
+	t=set_identity(3,3)
 	t[2][0]=tx
 	t[2][1]=ty
 	X=[[point[0],point[1],1]]
 	X=matrix_mul(X,t)
-	point[0]=X[0][0]
-	point[1]=X[0][1]
 
+	return X[0][0],X[0][1]
 def SetPixel(x,y):
 	glPointSize(10)
 	glColor3f(1.0,1.0,1.0)
@@ -51,14 +59,12 @@ def SetPixel(x,y):
 def display():
 	global v,theta,point,g
 	glClear(GL_COLOR_BUFFER_BIT)
+	x=y=0
 	t=0
 	while point[1]>=0:
-		translate((v*cos(theta)*t),((v*sin(theta)*t)-(0.5*g*(t**2))))
+		x,y=translate((v*cos(theta)*t),((v*sin(theta)*t)-(0.5*g*(t**2))))
 		t+=0.5 #step by 0.5 seconds
-		SetPixel(point[0],point[1])
-		#print point[0],point[1]
-
-	
+		SetPixel(x,y)	
 
 def main():
 	input()
